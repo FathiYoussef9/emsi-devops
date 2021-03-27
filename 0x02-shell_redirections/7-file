@@ -1,0 +1,3 @@
+#!/bin/bach
+echo "Holberton School"| cat > "\\\\\\'\"Holberton School\"\\'\\\$\\?\\\\\\\\\\*:)"
+
