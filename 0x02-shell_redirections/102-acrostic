@@ -1,0 +1,3 @@
+#!/bin/bash
+cut -c1 | paste -s | tr -d '\t' | xargs echo
+
