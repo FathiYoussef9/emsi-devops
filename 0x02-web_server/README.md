@@ -19,12 +19,3 @@
 * [Not found HTTP response code](https://en.wikipedia.org/wiki/HTTP_404)
 * [Logs files on Linux](https://www.cyberciti.biz/faq/ubuntu-linux-gnome-system-log-viewer/)
 * Inside server --> ```/usr/share/nginx/html/```  ;  ```/etc/nginx/sites-available/default```
-### Environment
-* Language: Bash Scripts
-* OS: Ubuntu 14.04 LTS
-* Styleguide: Shellcheck
-
----
-### Authors
-Melissa Ng [![M](https://upload.wikimedia.org/wikipedia/fr/thumb/c/c8/Twitter_Bird.svg/30px-Twitter_Bird.svg.png)](https://twitter.com/MelissaNg__)
-
