@@ -1,3 +1,2 @@
 #!/bin/bash
-tr -d [c,C]
-
+tr --delete C | tr --delete c
