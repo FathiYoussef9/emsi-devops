@@ -1,3 +1,2 @@
-#!/bin/bach
-echo "Holberton School"| cat > "\\\\\\'\"Holberton School\"\\'\\\$\\?\\\\\\\\\\*:)"
-
+#!/bin/bash
+echo "Holberton School" > "\\*\\\'\"Holberton School\"\\'\\\*\$\\?\\*\\*\\*\\*\\*:)"
