@@ -1,21 +1,8 @@
 #!/usr/bin/env bash
-# Install nginx web server 
-sudo apt-get update -y
-sudo apt-get install nginx -y
-sudo chown -R ubuntu:ubuntu /var/www/
-sudo chown -R ubuntu:ubuntu /etc/nginx
-if [ -f /var/www/html/index.nginx-debian.html ]; then
+#install nginx web server
+
+sudo apt-get -y update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
 sudo echo "Holberton School" | sudo tee /var/www/html/index.nginx-debian.html
-fi
-if [ -f /usr/share/nginx/html/index.html ]; then
-sudo echo "Holberton School" | sudo tee /usr/share/nginx/html/index.html
-fi
-if [ -f /etc/nginx/sites-enabled/default ]; then
-	sed -i -E 's/listen [0-9]+ default_server/listen 80 default_server/g' /etc/nginx/sites-enabled/default
-	sed -i -E 's/listen \[::\]:[0-9]+ default_server/listen [::]:80 default_server/g' /etc/nginx/sites-enabled/default
-fi	
-if [ -f /etc/nginx/nginx.conf ]; then
-	sed -i -E 's/listen [0-9]+ default_server/listen 80 default_server/g' /etc/nginx/nginx.conf
-	sed -i -E 's/listen \[::\]:[0-9]+ default_server/listen [::]:80 default_server/g' /etc/nginx/nginx.conf
-fi
-sudo /etc/init.d/nginx start
+sudo /etc/init.d/nginx restart
