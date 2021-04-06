@@ -1,18 +1,21 @@
 #!/usr/bin/env bash
-# Install nginx on your web-01 server
-# change index page to string "Holberton School"
-
-sudo apt-get update
-sudo apt-get -y upgrade
-sudo apt-get -y install nginx
-sudo service nginx start
-echo "Holberton School" | sudo tee /usr/share/nginx/html/index.html
-echo "Holberton School" | sudo tee /etc/nginx/html/index.html
-printf %s "server {
-     listen      80 default_server;
-     listen      [::]:80 default_server;
-     root        /etc/nginx/html;
-     index       index.html index.htm;
-}
-" | sudo tee /etc/nginx/sites-available/default
-sudo service nginx restart
+# Install nginx web server 
+sudo apt-get update -y
+sudo apt-get install nginx -y
+sudo chown -R ubuntu:ubuntu /var/www/
+sudo chown -R ubuntu:ubuntu /etc/nginx
+if [ -f /var/www/html/index.nginx-debian.html ]; then
+sudo echo "Holberton School" | sudo tee /var/www/html/index.nginx-debian.html
+fi
+if [ -f /usr/share/nginx/html/index.html ]; then
+sudo echo "Holberton School" | sudo tee /usr/share/nginx/html/index.html
+fi
+if [ -f /etc/nginx/sites-enabled/default ]; then
+	sed -i -E 's/listen [0-9]+ default_server/listen 80 default_server/g' /etc/nginx/sites-enabled/default
+	sed -i -E 's/listen \[::\]:[0-9]+ default_server/listen [::]:80 default_server/g' /etc/nginx/sites-enabled/default
+fi	
+if [ -f /etc/nginx/nginx.conf ]; then
+	sed -i -E 's/listen [0-9]+ default_server/listen 80 default_server/g' /etc/nginx/nginx.conf
+	sed -i -E 's/listen \[::\]:[0-9]+ default_server/listen [::]:80 default_server/g' /etc/nginx/nginx.conf
+fi
+sudo /etc/init.d/nginx start
