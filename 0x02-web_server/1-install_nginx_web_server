@@ -1,8 +1,7 @@
-#!/usr/bin/env bash
-# Creates an nginx web sever
+#!/usr/bin/env bash 
+# configuring a new ubuntu machine to respect requirements
 apt-get -y update
 apt-get -y install nginx
-sudo ufw allow 'Nginx HTTP'
 sed -i '0,/listen .*/s//listen 80 default_server;/' /etc/nginx/sites-available/default
-echo Holberton School > /var/www/html/index.nginx-debian.html
+echo "Holberton School" > /var/www/html/index.nginx-debian.html
 service nginx restart
