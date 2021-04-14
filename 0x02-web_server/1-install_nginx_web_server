@@ -3,5 +3,5 @@
 apt-get -y update
 apt-get -y install nginx
 sed -i '0,/listen .*/s//listen 80 default_server;/' /etc/nginx/sites-available/default
-echo "Holberton School" > /var/www/html/index.nginx-debian.html
+echo "Holberton School" | sudo tee /usr/share/nginx/html/index.html
 service nginx restart
