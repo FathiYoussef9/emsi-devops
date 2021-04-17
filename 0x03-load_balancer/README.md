@@ -19,6 +19,6 @@ Files that start with:
 * Web Servers: Nginx; (338-lb-01: ssh ubuntu@104.196.27.36); (338-web-01: ssh ubuntu@35.229.54.225); (338-web-02: ssh ubuntu@35.231.225.251)
 * Style guidelines: [Shellscript for Bash](https://github.com/koalaman/shellcheck)
 ---
-### Authors
-Melissa Ng [![M](https://upload.wikimedia.org/wikipedia/fr/thumb/c/c8/Twitter_Bird.svg/30px-Twitter_Bird.svg.png)](https://twitter.com/MelissaNg__)
+### Author
+Fathi Youssef
 
