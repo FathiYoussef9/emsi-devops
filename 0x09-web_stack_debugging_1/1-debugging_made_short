@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# rm nginx.pid 
-sudo sed -i 's/8080/80/' /etc/nginx/sites-enabled/default
-sudo service nginx restart
-sudo rm /var/run/nginx.pid
+# Fixing issues in a container
+cp -f /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+service nginx restart
+echo '9791' | sudo tee /run/nginx.pid
