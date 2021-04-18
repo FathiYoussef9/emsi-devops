@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Using what you did for task #0, make your fix short and sweet
-sudo sed -i "s/8080/80/g" /etc/nginx/sites-enabled/default
+# rm nginx.pid make service cmd no bueno
+sudo sed -i 's/8080/80/' /etc/nginx/sites-enabled/default
 sudo service nginx restart
-sudo kill -9 "$(cat /run/nginx.pid)"
+sudo rm /var/run/nginx.pid
