@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Fixing issues in a container
-cp -f /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-service nginx restart
-echo '9791' | sudo tee /run/nginx.pid
+# Fixes a bug on a server where nginx is not listening to port 80 shorter
+sed -i "s/8080/80/g" /etc/nginx/sites-enabled/default
+pkill -1 nginx
+
