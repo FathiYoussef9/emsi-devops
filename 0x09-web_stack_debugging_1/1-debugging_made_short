@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# rm nginx.pid make service cmd no bueno
+# rm nginx.pid 
 sudo sed -i 's/8080/80/' /etc/nginx/sites-enabled/default
 sudo service nginx restart
 sudo rm /var/run/nginx.pid
