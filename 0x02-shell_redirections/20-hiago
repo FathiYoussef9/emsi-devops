@@ -1,2 +1,0 @@
-#!/bin/bash
-tr --delete C | tr --delete c
