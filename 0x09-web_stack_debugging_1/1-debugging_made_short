@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Bash script for Make it sweet and short
+# script to link sites-enabled to sites-available and start nginx without running status
 ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-service nginx restart
-kill "$(pgrep 'nginx' | head -1)"
+sudo service nginx start
+rm /run/nginx.pid
