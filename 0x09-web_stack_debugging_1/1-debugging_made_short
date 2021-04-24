@@ -2,4 +2,4 @@
 # Bash script for Make it sweet and short
 ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 service nginx restart
-kill "$(pgrep 'nginx' | head -1)"
+sudo kill -9 "$(cat /run/nginx.pid)"
