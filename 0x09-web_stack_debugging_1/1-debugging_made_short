@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Bash script for Make it sweet and short
-ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-service nginx restart
-sudo kill -9 "$(cat /run/nginx.pid)"
+# Nginx must be running, and listening on port 80 of all the server’s active IPv4 ips
+sed -i -E 's/8080/80/g' /etc/nginx/sites-enabled/default
+sudo /etc/init.d/nginx restart
+rm /var/run/nginx.pid
