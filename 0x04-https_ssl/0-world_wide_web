@@ -1,19 +1,31 @@
 #!/usr/bin/env bash
-# Usage: ./1-world_wide_web <domain> <subdomain>
-# Display information about subdomains.
+# displays subdomain info
 
-domain_information () {
-    line=$(dig "$2"."$1" | grep -A1 'ANSWER SECTION:' | tr '\t' '\n' | tail -2 | tr '\n' ' ')
-    echo "$2 $line" | awk '{print "The subdomain " $1 " is a " $2 " record and points to " $3}'
+function subinfo {
+	 if [ -z $2 ] ; then
+	    wwwsub="www.$1"
+	    www_rec_type="$(dig $wwwsub | grep -A1 'ANSWER SECTION' | tail -1 | awk '{print $4}')"
+	    www_ip="$(dig $wwwsub | grep -A1 'ANSWER SECTION' | tail -1 | awk '{print $5}')"
+	    echo "The subdomain www is a $www_rec_type record and points to $www_ip"
+	    lb1sub="lb-01.$1"
+	    lb_rec_type="$(dig $lb1sub | grep -A1 'ANSWER SECTION' | tail -1 | awk '{print $4}')"
+	    lb_ip="$(dig $lb1sub | grep -A1 'ANSWER SECTION' | tail -1 | awk '{print $5}')"
+	    echo "The subdomain lb-01 is a $lb_rec_type record and points to $lb_ip"
+	    web1sub="web-01.$1"
+	    web1_rec_type="$(dig $web1sub | grep -A1 'ANSWER SECTION' | tail -1 | awk '{print $4}')"
+	    web1_ip="$(dig $web1sub | grep -A1 'ANSWER SECTION' | tail -1 | awk '{print $5}')"
+	    echo "The subdomain web-01 is a $web1_rec_type record and points to $web1_ip"
+	    web2sub="web-02.$1"
+	    web2_rec_type="$(dig $web2sub | grep -A1 'ANSWER SECTION' | tail -1 | awk '{print $4}')"
+	    web2_ip="$(dig $web2sub | grep -A1 'ANSWER SECTION' | tail -1 | awk '{print $5}')"
+	    echo "The subdomain web-02 is a $web2_rec_type record and points to $web2_ip"
+
+	 elif [ $# -eq 2 ] ; then
+	    subdomain="$2.$1"
+	    rec_type="$(dig $subdomain | grep -A1 'ANSWER SECTION' | tail -1 | awk '{print $4}')"
+	    ip="$(dig $subdomain | grep -A1 'ANSWER SECTION' | tail -1 | awk '{print $5}')"
+	    echo "The subdomain $2 is a $rec_type record and points to $ip"
+	 fi
 }
 
-if [ "$#" == 1 ]
-then
-  domain_information "$1" "www"
-  domain_information "$1" "lb-01"
-  domain_information "$1" "web-01"
-  domain_information "$1" "web-02"
-elif [ "$#" == 2 ]
-then
-  domain_information "$1" "$2"
-fi
+subinfo $1 $2
