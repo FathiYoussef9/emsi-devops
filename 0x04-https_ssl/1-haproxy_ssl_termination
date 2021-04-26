@@ -8,6 +8,9 @@ global
         group haproxy
         daemon
 
+        maxconn 2048
+        tune.ssl.default-dh-param 2049
+
         # Default SSL material locations
         ca-base /etc/ssl/certs
         crt-base /etc/ssl/private
@@ -32,6 +35,9 @@ defaults
         errorfile 503 /etc/haproxy/errors/503.http
         errorfile 504 /etc/haproxy/errors/504.http
 
+        option forwardfor
+        option http-server-close
+
 
 frontend www-http
     bind   *:80
@@ -41,7 +47,7 @@ frontend www-http
 frontend www-https
     bind   *:443 ssl crt /etc/haproxy/certs/www.fathiyoussef9.tech.pem
     reqadd X-Forwarded-Proto:\ https
-    http-request set-header X-SSL %[ssl_fc]
+
     acl    letsencrypt-acl path_beg /.well-known/acme-challenge/
     use_backend letsencrypt-backend if letsencrypt-acl
     default_backend www-backend
@@ -54,4 +60,3 @@ backend www-backend
 
 backend letsencrypt-backend
     server letsencrypt 127.0.0.1:54321
-                                         
