@@ -5,10 +5,8 @@ global
         stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners
         stats timeout 30s
         user haproxy
-        group haproxy        
+        group haproxy
         daemon
-        maxconn 2048
-	tune.ssl.default-dh-param 2048
 
         # Default SSL material locations
         ca-base /etc/ssl/certs
@@ -34,24 +32,26 @@ defaults
         errorfile 503 /etc/haproxy/errors/503.http
         errorfile 504 /etc/haproxy/errors/504.http
 
+
 frontend www-http
-	 bind *:80
-	 reqadd X-Forwarded-Proto:\ http
-	 default_backend www-backend
+    bind   *:80
+    reqadd X-Forwarded-Proto:\ http
+    default_backend www-backend
 
 frontend www-https
-	 bind *:443 ssl crt /etc/haproxy/certs/alexaorrico.online.pem
-	 reqadd X-Forwarded-Proto:\ https
-	 acl letsencrypt-acl path_beg /.well-known/acme-challenge/
-	 use_backend letsencrypt-backend if letsencrypt-acl
-	 default_backend www-backend
+    bind   *:443 ssl crt /etc/haproxy/certs/www.fathiyoussef9.tech.pem
+    reqadd X-Forwarded-Proto:\ https
+    http-request set-header X-SSL %[ssl_fc]
+    acl    letsencrypt-acl path_beg /.well-known/acme-challenge/
+    use_backend letsencrypt-backend if letsencrypt-acl
+    default_backend www-backend
 
 backend www-backend
-	redirect scheme https if !{ ssl_fc }
-	balance roundrobin
-	server 210-web-01 142.44.167.228:80 check
-        server 210-web-02 144.217.246.195:80 check
+    balance  roundrobin
+    redirect scheme https if !{ ssl_fc }
+    server 3123-web-01 35.237.154.2:80 check
+    server 3123-web-02 34.73.23.220:80 check
 
 backend letsencrypt-backend
-	server letsencrypt 127.0.0.1:54321
-
+    server letsencrypt 127.0.0.1:54321
+                                         
